@@ -1,0 +1,58 @@
+.board {
+    height: 380px;
+    width: 380px;
+    /* background-color: #282c34; */
+    background-color: #fff;
+    border-radius: 5px;
+    display: grid;
+    grid-template-columns: 120px 120px 120px;
+    grid-gap: 10px;
+    padding: 10px;
+}
+.cell {
+    width: 120px;
+    height: 120px;
+    font-size: 2.2em;
+    background-color: #282c34;
+}
+
+.cell div {
+    margin-top: 20px;
+}
+
+.cell.active {
+    cursor: pointer;
+}
+
+.cell.disabled {
+    background-color: rgb(125, 125, 125);
+}
+
+.cell.winner {
+    background-color: rgb(177, 238, 175);
+    color: rgb(171, 24, 24);
+}
+.header {
+    font-size: 1.5em;
+    margin-bottom: 5px;
+}
+
+.header div span {
+    color: rgb(177, 238, 175);
+}
+
+.btn-reset {
+    width: 200px;
+    height: 50px;
+    margin-top: 5px;
+    font-weight: bold;
+    font-size: 1.3em;
+    background-color: #4eaed4;
+    border: 1px solid #fff;
+    border-radius: 4px;
+    color: aliceblue;
+  }
+  
+  .btn-reset:hover {
+    cursor: pointer;
+  }
