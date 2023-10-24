@@ -5,7 +5,7 @@ import Cell from "../Cell";
 import Header from "../Header";
 import { best, minimax, minimax_alfa_beta, deepCopy } from "../TicTocCpuVsCpu/IaFunctions.js";
 var list = [];
-
+var ativarAlfaBeta = 'AlfaBeta'
 const TicTocCpuVsJogador = () => {
   const empytGame = [
     ["", "", ""],
@@ -35,46 +35,50 @@ const TicTocCpuVsJogador = () => {
   }
 
   // //Use effect Cpu Começa Primeiro X
-  // useEffect(() =>{
-
-  //   isGameOver();
-  //   const setIntervalos = setInterval(() => {
-  //     if (!nextPlayer && !gameOver) {
-  //       // if(!jogadaInicialRef.current){
-  //       //   jogadaRandom(jogadaInicial);
-  //       //   jogadaInicialRef.current = true;
-  //       //   setNextPlayer(true);
-  //       // }else{
-  //         IAalfaBeta(X);
-  //         setNextPlayer(true);
-  //       }
-  //     // }else{
-  //     //   //IAalfaBeta(O);
-  //     // }
-  //   }, 1000);
-
-  //   return (() =>{
-  //     clearInterval(setIntervalos)
-  //   })
-
-  // }, [nextPlayer, cells, gameOver])
-
-
-  // Use effect jogador começa com X e o computador é o O
   useEffect(() =>{
-    isGameOver();
 
+    isGameOver();
     const setIntervalos = setInterval(() => {
-      if(nextPlayer && !gameOver){
-        IAminiMax(O);
-        setNextPlayer(false);
-      }
+      if (!nextPlayer && !gameOver) {
+        // if(!jogadaInicialRef.current){
+        //   jogadaRandom(jogadaInicial);
+        //   jogadaInicialRef.current = true;
+        //   setNextPlayer(true);
+        // }else{
+          IAalfaBeta(X);
+          setNextPlayer(true);
+        }
+      // }else{
+      //   //IAalfaBeta(O);
+      // }
     }, 1000);
 
     return (() =>{
       clearInterval(setIntervalos)
     })
+
   }, [nextPlayer, cells, gameOver])
+
+
+  // Use effect jogador começa com X e o computador é o O
+  // useEffect(() =>{
+  //   isGameOver();
+
+  //   const setIntervalos = setInterval(() => {
+  //     if(nextPlayer && !gameOver){
+  //       if(ativarAlfaBeta == 'AlfaBeta'){
+  //         IAalfaBeta(O);
+  //       } else {
+  //         IAminiMax(O);
+  //       }
+  //       setNextPlayer(false);
+  //     }
+  //   }, 1000);
+
+  //   return (() =>{
+  //     clearInterval(setIntervalos)
+  //   })
+  // }, [nextPlayer, cells, gameOver])
 
   const cellClick = (row, column) => {
     if (gameOver || winner) {
@@ -91,7 +95,7 @@ const TicTocCpuVsJogador = () => {
 
     setCells(newBoard);
     changeChar();
-    setNextPlayer(true);
+    setNextPlayer(false);
   };
 
   const changeChar = () => {
@@ -137,7 +141,10 @@ const TicTocCpuVsJogador = () => {
     ) {
       endGame("");
     }
-    console.log(list)
+    if(list.length == 4){
+      console.log(list);
+      list =[];
+    }
   };
 
   const endGame = (winner) => {
@@ -233,6 +240,14 @@ const TicTocCpuVsJogador = () => {
     algoritmo(jogada, minimax_alfa_beta);
   };
 
+  const changeAlgoritm = () =>{
+    if(ativarAlfaBeta == 'AlfaBeta'){
+      ativarAlfaBeta = 'MiniMax'
+    }else {
+      ativarAlfaBeta = 'AlfaBeta'
+    }
+  }
+
   return (
     <div className="App-header">
       <AppContext.Provider
@@ -270,6 +285,15 @@ const TicTocCpuVsJogador = () => {
         }}
       >
         Reset
+      </button>
+
+      <button
+        className="btn-reset"
+        onClick={() => {
+          changeAlgoritm();
+        }}
+      >
+        MiniMax
       </button>
     </div>
   );

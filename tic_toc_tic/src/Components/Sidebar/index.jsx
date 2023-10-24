@@ -9,7 +9,7 @@ const Sidebar = ({OpenSidebarToggle,OpenSidebar}) => {
     <aside id="sidebar" className={OpenSidebarToggle ? "sidebar-responsive": ""}>
         <div className="sidebar-title">
             <div className="sidebar-brand">
-                <BsCart3 className="icon_header"/>SHOP
+                MiniMax e Alfa Beta
             </div>
             <span className="close-icon" onClick={OpenSidebar}>X</span>
         </div>

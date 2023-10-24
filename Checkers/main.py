@@ -24,7 +24,7 @@ def finish_game(color):
 
     # Display some text
     font = pygame.font.Font(None, 36)
-    text = font.render("Joga dor campeão " + color, 1, (10, 10, 10))
+    text = font.render("Jogador campeão " + color, 1, (10, 10, 10))
     textpos = text.get_rect()
     textpos.centerx = background.get_rect().centerx
     background.blit(text, textpos)
