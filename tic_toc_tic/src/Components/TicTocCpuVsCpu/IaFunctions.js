@@ -1,4 +1,15 @@
-const deepCopy = (item) => {
+var resultComparacao ={
+    row : '',
+    columns : '',
+    time: '',
+    node: '',
+    qtd: '',
+    player:'',
+    algoritmo:''
+}
+
+
+export const deepCopy = (item) => {
   return JSON.parse(JSON.stringify(item));
 };
 
@@ -71,6 +82,9 @@ export const minimax_alfa_beta = (
 
   let jogadas = jogadasPossiveis(board);
 
+  resultComparacao.qtd += 1;
+  resultComparacao.player = jogadorNovo;
+
   if (jogadorNovo == jogadorAntigo) {
     let bestScore = -10;
     for (let i in jogadas) {
@@ -110,19 +124,18 @@ export const minimax_alfa_beta = (
   }
 };
 
-export const minimax = (board, jogadorNova, jogadorAntigo, qtdNos) => {
-  // let parada = potoDeParada(board,jogadorAntigo);
-  // if(parada != null){
-  //   return parada;
-  // }
+export const minimax = (board, jogadorNova, jogadorAntigo) => {
+  
+  let parada = potoDeParada(board,jogadorAntigo);
+  if(parada != null){
+    return parada;
+  }
 
-  let w = verificarQuemGanhou(board);
-  if (w == jogadorAntigo) return 1;
-  if (w && w != jogadorAntigo) return -1;
-  if (!w && verificarSeEmpatou(board)) return 0;
   // Codigo de recusividade aqui
   let jogadas = jogadasPossiveis(board);
-  //console.log(qtdNos);
+  
+  resultComparacao.qtd += 1;
+  resultComparacao.player = jogadorNova;
   // Significa que ele é o X
   if (jogadorNova == jogadorAntigo) {
     //MAX
@@ -162,6 +175,10 @@ export const best = (board, jogadorAntigo, algoritmo) => {
   let jogadas = jogadasPossiveis(board);
   let best = -10;
   let posicaoJogada = null;
+  resultComparacao.qtd = 0;
+  let execution = new Date();
+
+  resultComparacao.algoritmo = algoritmo.name;
   for (let i in jogadas) {
     let resultado = jogada(board, jogadas[i], jogadorAntigo);
     let valor = algoritmo(
@@ -171,14 +188,23 @@ export const best = (board, jogadorAntigo, algoritmo) => {
       -10,
       10
     );
-    console.log(jogadas[i], i);
-    console.log(valor);
+    //console.log(jogadas[i], i);
+    //console.log(valor);
+    resultComparacao.node = i;
     if (valor > best) {
       best = valor;
       posicaoJogada = jogadas[i];
+      resultComparacao.row = posicaoJogada[0];
+      resultComparacao.columns = posicaoJogada[1];
     }
-    console.log(resultado);
+    //console.log(resultado);
   }
 
-  return posicaoJogada;
+  resultComparacao.time =  new Date() - execution + " ms";
+
+  //console.log(resultComparacao)
+
+  return {posicaoJogada,resultComparacao};
+  // return posicaoJogada;
+
 };

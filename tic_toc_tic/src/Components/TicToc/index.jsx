@@ -131,7 +131,7 @@ const TicToc = (props) => {
     }
       
   return (
-    <div>
+    <div className="App-header">
     <AppContext.Provider value={{cells,setCells,setCurrentChar,cellClick,changeChar,currentChar,winner,gameOver,winnerCells}}>
         <Header></Header>
         <div className="board">
