@@ -174,6 +174,9 @@ class Board:
             right += 1
     
         return moves
+    
+    def __str__(self):
+        return f'Bord = {self.board}'
 
 
 

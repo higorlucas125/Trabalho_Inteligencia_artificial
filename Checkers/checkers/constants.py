@@ -1,5 +1,7 @@
 import pygame
 
+#Create game Window Menu
+SCREEN_WIDTH,SCREEN_HEIGHT=800,600
 WIDTH, HEIGHT = 800,800
 ROWS, COLS = 8,8
 SQUARE_SIZE = WIDTH//COLS
