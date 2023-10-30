@@ -144,7 +144,7 @@ def playVsAlphBeta ():
             contador = GlobalCounter()
             value,new_board = alphabeta(game.get_board(),4,WHITE,game,contador,float("-inf"),float("inf"))
             contador.set_chousen_board(new_board)
-            print('{}{}{}',contador,minimax.__name__,value)
+            print('{}{}{}',contador,alphabeta.__name__,value)
             game.ai_move(new_board)
 
         if game.winner() != None:
@@ -179,17 +179,9 @@ def CpuVsCpu(algorithm):
             contador = GlobalCounter()
             value,new_board = algorithm(game.get_board(),4,False,game,contador,float("-inf"),float("inf"))
             contador.set_chousen_board(new_board)
-            print(contador,minimax.__name__,value)
+            print(contador,algorithm.__name__,value)
             game.ai_move(new_board)
             pygame.time.delay(1000)
-        
-        # if game.turn == WHITE:
-            # contador = GlobalCounter()
-            # value,new_board = algorithm(game.get_board(),4,True,game,contador,float("-inf"),float("inf"))
-            # contador.set_chousen_board(new_board)
-            # print(contador,minimax.__name__,value)
-            # game.ai_move(new_board)
-        #     pygame.time.delay(1000)
         
         if game.winner() != None:
             finish_game(game.winner())
@@ -207,7 +199,7 @@ def CpuVsCpu(algorithm):
                         contador = GlobalCounter()
                         value,new_board = algorithm(game.get_board(),4,True,game,contador,float("-inf"),float("inf"))
                         contador.set_chousen_board(new_board)
-                        print(contador,minimax.__name__,value)
+                        print(contador,algorithm.__name__,value)
                         game.ai_move(new_board)
                 # if game.turn == RED:
                 #     game.select(row,col)
